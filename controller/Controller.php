@@ -26,10 +26,13 @@
            $view->show(array('user' => $user));   
     }
 
-    public function vistaIniciarSesion(){
+    public function vistaIniciarSesion($datos){
 
         $view = new IniciarSesion();
-        $view->show();
+         if(empty($datos))
+           $view->show(array('mensaje' => null));
+        else
+           $view->show($datos);  
     }
 
 
