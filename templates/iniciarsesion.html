@@ -7,11 +7,23 @@
 </head>
 <body>
 
+{% if mensaje is defined %}
+
+  {% if not mensaje is empty %}
+    <CENTER>
+    <div class="alert alert-danger" role="alert">
+    {{ mensaje }}
+    </div>
+    </CENTER>
+  {% endif %}
+
+{% endif %}
 
 
 <div class="container">
   <main class="main">
   <center>
+  <h2> Login Usuarios</h2>
   <form action="./index.php?action=verificarDatosUsuario" method="POST">
   <div class="form-group col-md-4">
     <label for="exampleInputEmail1">Email address</label>
@@ -33,6 +45,7 @@
 <div class="container">
   <main class="main">
   <center>
+    <h2> Login Administracion</h2>
   <form action="./index.php?action=verificarDatosAdministrador" method="POST">
   <div class="form-group col-md-4">
     <label for="exampleInputUsername1">Username</label>
@@ -46,16 +59,7 @@
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
-{% if mensaje is defined %}
 
-  {% if not mensaje is empty %}
-    <br>
-    <div class="alert alert-danger" role="alert">
-    {{ mensaje }}
-    </div>
-  {% endif %}
-
-{% endif %}
 
 
   </center>

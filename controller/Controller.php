@@ -20,10 +20,11 @@
 
     public function vistaHome($user){
         $view = new Home();
+        $listaresidencia=PDOResidencia::getInstance()->listarTodas();
         if(empty($user))
-           $view->show(array('user' => null));
+           $view->show(array('user' => null,'listaresidencia'=> $listaresidencia));
         else
-           $view->show(array('user' => $user));   
+           $view->show(array('user' => $user,'listaresidencia'=> $listaresidencia));   
     }
 
     public function vistaIniciarSesion($datos){

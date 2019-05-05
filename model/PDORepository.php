@@ -1,22 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of PDORepository
- *
- * @author fede
- */
 abstract class PDORepository {
     
     const USERNAME = "root";
     const PASSWORD = "";
 	const HOST ="localhost";
-	const DB = "grupo2";
+	const DB = "homesweethome";
     
     
     private function getConnection(){

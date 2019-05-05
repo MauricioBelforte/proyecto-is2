@@ -10,6 +10,9 @@ require_once('controller/AdministradorController.php');
 require_once('view/TwigView.php');
 require_once('view/Home.php');
 require_once('view/IniciarSesion.php');
+require_once('model/PDORepository.php');
+require_once('model/PDOResidencia.php');
+require_once('model/Residencia.php');
 
 if(isset($_GET["action"]) && $_GET["action"] == 'iniciarsesion'){
      Controller::getInstance()->vistaIniciarSesion(null);   
