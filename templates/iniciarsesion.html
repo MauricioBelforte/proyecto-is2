@@ -1,8 +1,8 @@
-<!DOCTYPE html>
+{% include 'encabezado.html' %}
 <html>
 <head>
   <title></title>
-
+{% include 'barra.html' %}
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 <body>
@@ -13,6 +13,27 @@
   <div class="form-group col-md-4">
     <label for="exampleInputEmail1">Email address</label>
     <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+  <div class="form-group col-md-4"">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+  </center>
+  </main>
+</div>
+<br>
+<br>
+
+<div class="container">
+  <main class="main">
+  <center>
+  <form action="./index.php?action=verificarDatosAdministrador" method="POST">
+  <div class="form-group col-md-4">
+    <label for="exampleInputUsername1">Username</label>
+    <input type="username" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
   <div class="form-group col-md-4"">
     <label for="exampleInputPassword1">Password</label>

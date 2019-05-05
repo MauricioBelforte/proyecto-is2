@@ -1,0 +1,59 @@
+<?php
+
+ class Controller {
+    
+    private static $instance;
+
+    public static function getInstance() {
+
+        if (!isset(self::$instance)) {
+            self::$instance = new self();
+        }
+
+        return self::$instance;
+    }
+    
+    private function __construct() {
+        
+    }
+    
+
+    public function vistaHome($user){
+        $view = new Home();
+        if(empty($user))
+           $view->show(array('user' => null));
+        else
+           $view->show(array('user' => $user));   
+    }
+
+    public function vistaIniciarSesion(){
+
+        $view = new IniciarSesion();
+        $view->show();
+    }
+
+
+    public function alta_sesion($usuario,$id){
+        if(!isset($_SESSION)){
+            session_start();
+         }else{
+             session_destroy();
+             session_start(); 
+         }
+        $_SESSION['id'] = $id;
+        $_SESSION['usuario']= $usuario;
+
+    }
+
+    public function cerrarSesion(){
+        session_destroy();
+        $this->vistaHome(null);
+    }
+
+    public function verificarDatos(){}
+
+
+
+
+}
+    

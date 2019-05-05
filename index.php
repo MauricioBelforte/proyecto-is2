@@ -8,21 +8,23 @@ session_start();
 require_once('controller/UsuarioController.php');
 require_once('view/TwigView.php');
 require_once('view/Home.php');
-require_once('view/IniciarSesionUsuario.php');
+require_once('view/IniciarSesion.php');
 
 if(isset($_GET["action"]) && $_GET["action"] == 'iniciarsesionusuario'){
-     UsuarioController::getInstance()->iniciarsesionusuario();
+     Controller::getInstance()->vistaIniciarSesion();
      
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosUsuario'){
-     UsuarioController::getInstance()->verificarDatosUsuario();
+     UsuarioController::getInstance()->verificarDatos();
 }
-
+else if(isset($_GET["action"]) && $_GET["action"] == 'cerrarSesion'){
+     Controller::getInstance()->cerrarSesion();
+}     
 else{
 	if(!isset($_SESSION['usuario']))
-		UsuarioController::getInstance()->home(null);
+		Controller::getInstance()->vistaHome(null);
     else
-	    UsuarioController::getInstance()->home($_SESSION['usuario']);
+	    Controller::getInstance()->vistaHome($_SESSION['usuario']);
 }
 
 
