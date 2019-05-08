@@ -27,6 +27,12 @@
            $view->show(array('user' => $user,'listaresidencia'=> $listaresidencia));   
     }
 
+    public function vistaExito($mensaje){
+        $view = new Exito();
+        $view->show($mensaje);
+
+    }
+
     public function vistaIniciarSesion($datos){
 
         $view = new IniciarSesion();

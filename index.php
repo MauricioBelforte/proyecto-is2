@@ -6,10 +6,13 @@ error_reporting(-1);
 session_start();
 
 require_once('controller/UsuarioController.php');
+require_once('controller/ResidenciaController.php');
 require_once('controller/AdministradorController.php');
 require_once('view/TwigView.php');
 require_once('view/Home.php');
 require_once('view/IniciarSesion.php');
+require_once('view/Exito.php');
+require_once('view/CargarResidencia.php');
 require_once('model/PDORepository.php');
 require_once('model/PDOResidencia.php');
 require_once('model/Residencia.php');
@@ -25,7 +28,13 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosAdministrado
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'cerrarSesion'){
      Controller::getInstance()->cerrarSesion();
-}     
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'cargarResidencia'){
+     ResidenciaController::getInstance()->cargarResidencia(null);
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosResidencia'){
+     ResidenciaController::getInstance()->verificarDatosResidencia();
+}           
 else{
 	if(!isset($_SESSION['usuario']))
 		Controller::getInstance()->vistaHome(null);
