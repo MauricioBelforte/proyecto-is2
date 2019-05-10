@@ -13,8 +13,11 @@ require_once('view/Home.php');
 require_once('view/IniciarSesion.php');
 require_once('view/Exito.php');
 require_once('view/CargarResidencia.php');
+require_once('view/MostrarResidencia.php');
 require_once('model/PDORepository.php');
 require_once('model/PDOResidencia.php');
+require_once('model/PDOResidenciaSemana.php');
+require_once('model/ResidenciaSemana.php');
 require_once('model/Residencia.php');
 
 if(isset($_GET["action"]) && $_GET["action"] == 'iniciarsesion'){
@@ -34,7 +37,10 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'cargarResidencia'){
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosResidencia'){
      ResidenciaController::getInstance()->verificarDatosResidencia();
-}           
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'mostrarResidencia' && !empty($_GET['id'])){
+     ResidenciaController::getInstance()->mostrarResidencia($_GET['id']);
+}            
 else{
 	if(!isset($_SESSION['usuario']))
 		Controller::getInstance()->vistaHome(null);

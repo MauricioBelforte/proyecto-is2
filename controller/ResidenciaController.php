@@ -40,6 +40,16 @@ class ResidenciaController extends Controller {
 
     }
 
+    public function mostrarResidencia($idResidencia){
+        $view= new MostrarResidencia();
+        if(!isset($_SESSION['usuario']) ||  empty($_SESSION['usuario']))
+           $view->show(array('user' => null,'residencia' => PDOResidencia::getInstance()->traerResidencia($idResidencia), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($idResidencia)));
+
+        else
+
+           $view->show(array('user' => $_SESSION['usuario'], 'residencia' => PDOResidencia::getInstance()->traerResidencia($idResidencia), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($idResidencia)));
+    }
+
 
 
 

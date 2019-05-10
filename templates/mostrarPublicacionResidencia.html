@@ -1,0 +1,71 @@
+{% include 'encabezado.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Publicacion de Residencia</title>
+</head>
+{% include 'barra.html' %}
+
+<body>
+
+
+
+	<div class="container">
+		 <a href="" class="btn btn-primary" role="button" aria-pressed="true">Editar INFO </a>
+
+      <a href="" class="btn btn-primary" role="button" aria-pressed="true">Crear Subasta </a>
+  
+    <main class="main">
+
+	<center><h1>{{ residencia[0].titulo }}</h1>
+		<br>
+       
+          <div style="height: 40%;width: 40%;">
+           <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+           <div class="carousel-inner">
+           <div class="carousel-item active">
+              <img src="./imagen/imagen1.jpg" class="d-block w-100" alt="...">
+           </div>
+           </div>
+           </div>
+      </center>
+
+     <br>
+    <br>
+	<p>Provincia: {{ residencia[0].provincia }} </p>
+     <br>
+	<p>Partido: {{ residencia[0].partido }}</p>
+	     <br>
+	<p>Localidad: {{ residencia[0].ciudad }}</p>
+	<br>
+
+	<p>Direccion: {{ residencia[0].direccion }}</p>
+	<br>
+
+	<p> Descripcion: {{ residencia[0].descripcion }}</p>
+	<br>
+
+	<center><h4> Lista de Semanas Disponibles (Solo Subastas) </h4>
+		<br>
+    {% if residenciasemanasubastas is not empty %}
+			{% for rs in residenciasemanasubastas %}
+           <form action="./index.php?action=verSemana" method="GET">
+             <input type="radio" name="idRS" value="{{rs.idResidenciaSemana}}"> Fecha Inicio: {{rs.fecha_inicio}} - Fecha Fin: {{rs.fecha_fin}}
+
+
+
+             <br>
+            {% endfor %}
+            <br>
+            <button type="submit" class="btn btn-primary">Ver Semana</button>  
+
+            </form>
+  {% endif %}
+
+	</center>
+
+
+</main>
+</div>
+</body>
+</html>
