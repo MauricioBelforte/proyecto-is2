@@ -30,27 +30,121 @@
       <div class="carousel-item">
         <img class="d-block w-100" src="imagen/residencia-2.jpg" alt="Second slide">
       </div>
-      <div class="carousel-item">
-        <img class="d-block w-100" src="imagen/residencia-3.jpg" alt="Third slide">
-      </div>
-
-
-
 
       <div class="position-absolute align-self-center">
+
         <!-- TITLE -->
         <h1 class="text-white text-center" style="font-size: 80px"> Home Switch Home </h1>
-        <!-- BUTTONS -->
+
         <div class="text-center">
-          <button type="button" class="btn btn-primary btn-lg mr-3">Iniciar Sesión</button>
-          <button type="button" class="btn btn-secondary btn-lg mr-4">Registrarse</button>
+
+          <!-- LOG IN -->
+          <button type="button" class="btn btn-primary btn-lg mr-3" data-toggle="modal" data-target="#login">Iniciar Sesión</button>
+
+          <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="loginLabel">Iniciar Sesión</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="email-input-login" class="col-form-label">Email</label>
+                      <input type="text" class="form-control" id="email-input-login">
+                    </div>
+                    <div class="form-group">
+                      <label for="password-input-login" class="col-form-label">Contraseña</label>
+                      <input type="text" class="form-control" id="password-input-login">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary">Entrar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- SIGN UP -->
+          <button type="button" class="btn btn-secondary btn-lg mr-4" data-toggle="modal" data-target="#signup">Registrarse</button>
+
+          <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="signup-label">Registrarse</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="email-input-signup" class="col-form-label">Email</label>
+                      <input type="text" class="form-control" id="email-input-signup">
+                    </div>
+                    <div class="form-group">
+                      <label for="password-input-signup" class="col-form-label">Contraseña</label>
+                      <input type="text" class="form-control" id="password-input-signup">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="button" class="btn btn-primary">Crear cuenta</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
 
-      <div class="text-white position-absolute align-self-end text-center mb-5">
-        <button type="button" class="btn btn-link">Acceso para administradores</button>
-        <p>Powered by AMG</p>
+      <div class="position-absolute align-self-end text-center mb-5">
+
+        <!-- ADMIN LOGIN -->
+        <button type="button" class="btn btn-link text-white font-size-10" data-toggle="modal" data-target="#admin-login">Acceso para administradores</button>
+
+        <form action="./index.php?action=admin-login" method="POST">
+          <div class="modal fade" id="admin-login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="admin-login-label">Acceso para administradores</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="form-group">
+                      <label for="email-input-admin" class="col-form-label">Email</label>
+                      <input name="email-input-admin" type="text" class="form-control" id="email-input-admin">
+                    </div>
+                    <div class="form-group">
+                      <label for="password-input-admin" class="col-form-label">Contraseña</label>
+                      <input name="password-input-admin" type="password" class="form-control" id="password-input-admin">
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  <button type="submit" class="btn btn-primary">Acceder</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+
+        <p class="mb-5 font-italic text-white">Powered by AMG</p>
       </div>
 
     </div>
