@@ -65,6 +65,43 @@ class ResidenciaController extends Controller {
            $view->show(array('user' => $_SESSION['usuario'],'tipousuario' => $_SESSION['tipo'], 'residencia' => PDOResidencia::getInstance()->traerResidencia($idResidencia), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($idResidencia)));
     }
 
+    public function vistaSemana($datos){
+
+        $view = new Semana();
+        $view->show($datos);
+
+    }
+
+
+    public function verSemana($idRS){
+        //idRS = identificador de residencia semana... Esto es solo para las subastas
+        $subasta = PDOSubasta::getInstance()->subastaInfo($idRS);
+        if(empty($subasta) ||  empty($_SESSION['usuario'])){
+            //No inicio sesion o no hay subastas (ERROR);
+            return false;
+        }
+
+         //indexo la subasta (recordar que me manda un arreglo y siempre va a ser un solo elemento)
+
+         $datos= array('user' => $_SESSION['usuario'],'tipousuario' => $_SESSION['tipo'],'base' => $subasta[0]->getBase(),'idSubasta' => $subasta[0]->getIdSubasta(), 'puja' => PDOSubasta::getInstance()->pujaMaximaSubasta($subasta[0]->getIdSubasta()));
+
+         $this->vistaSemana($datos);
+
+     }
+
+
+     public function verificarDatosPuja($idSubasta, $puja){
+        //falta mandar vista de errores y de exito
+        if (PDOSubasta::getInstance()->esMayorPuja($idSubasta, $puja)) {
+
+    PDOSubasta::getInstance()->insertarParticipanteSubasta($_SESSION['id'], $idSubasta, $puja);
+            return true;
+        }
+
+       return false;
+      
+     }
+
 
 
 
