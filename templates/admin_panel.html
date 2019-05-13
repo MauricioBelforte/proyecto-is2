@@ -16,8 +16,59 @@
 </head>
 <body>
 
+  <!-- NAVIGATION BAR -->
   {% include 'barra.html' %}
-  {% include 'residencias.html' %}
+
+  <div class="row no-gutters">
+    <!-- LISTADO DE RESIDENCIAS -->
+    <div class="col-md-6">
+      {% for residencia in listaresidencia %}
+      <div class="card">
+        <div class="card-body">
+
+          <div class="row">
+
+            <div class="col-md-4 ml-5 mr-3">
+              <img src="./imagen/imagen1.jpg" class="card-img" alt="...">
+            </div>
+
+            <div class="col-md-4 mt-3">
+              <h5 class="card-title">{{ residencia.titulo }}</h5>
+              <p class="card-text"> {{ residencia.direccion}} {{ residencia.pais }} </p>
+
+              <a href="#" class="btn btn-primary btn-sm">Abrir</a>
+              <a href="#" class="btn btn-secondary btn-sm">Editar</a>
+              <a href="#" class="btn btn-danger btn-sm">Borrar</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- DETALLE DE RESIDENCIA -->
+      <div class="col-md-6">
+        <div class="card pt-sm-5 pl-sm-5 pr-sm-5">
+          <img class="card-img-top " src="imagen/residencia-1.jpg" height="400px" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">Residencia abierta</h5>
+            <p class="card-text">Descripción de la residencia</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Dirección</li>
+            <li class="list-group-item">Provincia</li>
+            <li class="list-group-item">País</li>
+          </ul>
+          <div class="card-body">
+            <a href="#" class="card-link">Publicaciones</a>
+            <a href="#" class="card-link">Cerrar</a>
+          </div>
+        </div>
+      </div>
+
+  </div>
+
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
