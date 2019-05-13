@@ -18,13 +18,13 @@
     }
     
 
-    public function vistaHome($user){
+    public function vistaHome($datos){
         $view = new Home();
         $listaresidencia=PDOResidencia::getInstance()->listarTodas();
-        if(empty($user))
+        if(empty($datos['user']))
            $view->show(array('user' => null,'listaresidencia'=> $listaresidencia));
         else
-           $view->show(array('user' => $user,'listaresidencia'=> $listaresidencia));
+           $view->show(array('user' => $datos['user'],'listaresidencia'=> $listaresidencia, 'tipousuario' => $datos['tipousuario']));
 
 
     }

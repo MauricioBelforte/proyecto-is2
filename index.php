@@ -45,7 +45,7 @@ else{
 	if(!isset($_SESSION['usuario']))
 		Controller::getInstance()->vistaHome(null);
     else
-	    Controller::getInstance()->vistaHome($_SESSION['usuario']);
+	    Controller::getInstance()->vistaHome(array('user' => $_SESSION['usuario'], 'tipousuario' => $_SESSION['tipo']));
 }
 
 
