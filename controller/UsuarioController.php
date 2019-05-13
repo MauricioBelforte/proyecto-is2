@@ -26,8 +26,8 @@ class UsuarioController extends Controller {
              return false;
         }
 
-        if($_POST['email'] == "admin@admin.com" && $_POST['password'] == 1234){
-             $this->alta_sesion($_POST['email'], 1); // el id es ficticio para esta entrega
+        if($_POST['email'] == "usuario@usuario.com" && $_POST['password'] == 1234){
+             $this->alta_sesion($_POST['email'], 1, "usuario"); // el id es ficticio para esta entrega
              $this->vistaHome($_POST['email']);
         }else{           
              $this->vistaIniciarSesion(array('mensaje' => "Usuario o contraseña incorrecta"));

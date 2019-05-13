@@ -11,6 +11,8 @@
 
 
 	<div class="container">
+
+
 		 <a href="" class="btn btn-primary" role="button" aria-pressed="true">Editar INFO </a>
 
       <a href="" class="btn btn-primary" role="button" aria-pressed="true">Crear Subasta </a>
@@ -18,9 +20,8 @@
     <main class="main">
 
 	<center><h1>{{ residencia[0].titulo }}</h1>
-		<br>
-       
-          <div style="height: 40%;width: 40%;">
+
+   <div style="height: 40%;width: 40%;">
            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
            <div class="carousel-inner">
            <div class="carousel-item active">
@@ -28,22 +29,36 @@
            </div>
            </div>
            </div>
-      </center>
+         </center>
+		<br>
 
-     <br>
-    <br>
-	<p>Provincia: {{ residencia[0].provincia }} </p>
-     <br>
-	<p>Partido: {{ residencia[0].partido }}</p>
-	     <br>
-	<p>Localidad: {{ residencia[0].ciudad }}</p>
-	<br>
 
-	<p>Direccion: {{ residencia[0].direccion }}</p>
-	<br>
+<div class="card">
 
-	<p> Descripcion: {{ residencia[0].descripcion }}</p>
-	<br>
+           
+
+
+  <div class="card-body">
+    Provincia: {{ residencia[0].provincia }}
+  </div>
+    <div class="card-body">
+    Partido: {{ residencia[0].partido }}
+  </div>
+    <div class="card-body">
+    Localidad: {{ residencia[0].ciudad }}
+  </div>
+    <div class="card-body">
+    Direccion: {{ residencia[0].direccion }}
+  </div>
+    <div class="card-body">
+    Descripcion: {{ residencia[0].descripcion }}
+  </div>
+
+</div>
+
+
+</div>
+<br>
 
 	<center><h4> Lista de Semanas Disponibles (Solo Subastas) </h4>
 		<br>
