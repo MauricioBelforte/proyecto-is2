@@ -49,6 +49,9 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'admin-login'){
 else if(isset($_GET["action"]) && $_GET["action"] == 'user-login'){
   UsuarioController::getInstance()->userLogin();
 }
+else if(isset($_GET["action"]) && $_GET["action"] == 'list-auctions'){
+  AuctionsController::getInstance()->listAuctions();
+}
 else{
 	if(!isset($_SESSION['usuario']))
 		Controller::getInstance()->vistaHome(null);
