@@ -85,6 +85,12 @@ class ResidenciaController extends Controller {
 
          $datos= array('user' => $_SESSION['usuario'],'tipousuario' => $_SESSION['tipo'],'base' => $subasta[0]->getBase(),'idSubasta' => $subasta[0]->getIdSubasta(), 'puja' => PDOSubasta::getInstance()->pujaMaximaSubasta($subasta[0]->getIdSubasta()));
 
+         if(PDOSubasta::getInstance()->idUsuarioPujaMaximaSubasta($subasta[0]->getIdSubasta()) == $_SESSION['id'])
+             $datos['boton']=false;
+         else
+            $datos['boton']=true;
+
+
          $this->vistaSemana($datos);
 
      }
@@ -92,12 +98,24 @@ class ResidenciaController extends Controller {
 
      public function verificarDatosPuja($idSubasta, $puja){
         //falta mandar vista de errores y de exito
-        if (PDOSubasta::getInstance()->esMayorPuja($idSubasta, $puja)) {
 
-    PDOSubasta::getInstance()->insertarParticipanteSubasta($_SESSION['id'], $idSubasta, $puja);
+        $creditos=1; // esto existe por que no se hacen consultas de primera movida (despues se saca)
+        if($_SESSION['tipo'] == "administrador"){
+               $this->vistaExito(array('mensaje' =>"No tiene permisos para hacer esta accion", 'user' => $_SESSION['usuario']));
+               return false;
+
+        }
+        if (PDOSubasta::getInstance()->esMayorPuja($idSubasta, $puja) && $creditos > 0) {
+
+          PDOSubasta::getInstance()->insertarParticipanteSubasta($_SESSION['id'], $idSubasta, $puja);
+          $this->vistaExito(array('mensaje' =>"¡¡¡La Puja fue registrada!!!", 'user' => $_SESSION['usuario']));
             return true;
         }
+        if($creditos == 0){
 
+          $this->vistaExito(array('mensaje' =>"Creditos Insuficientes", 'user' => $_SESSION['usuario']));
+        
+        }
        return false;
       
      }

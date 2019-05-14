@@ -34,11 +34,16 @@ class PDOSubasta extends PDORepository {
 
     public function pujaMaximaSubasta($idSubasta){
 
-     $answer = $this->queryList("SELECT max(ps.puja) as puja FROM participa_subasta ps WHERE idSubasta= :idSubasta",array(':idSubasta' => $idSubasta));
-     if(!empty($answer))
+     $answer = $this->queryList("SELECT max(ps.puja) as puja, base FROM participa_subasta ps INNER JOIN subasta s ON (s.idSubasta=ps.idSubasta) WHERE s.idSubasta=:idSubasta",array(':idSubasta' => $idSubasta));
+     if(!empty($answer[0]["puja"])){
         return $answer[0]["puja"];
-     else
-        return 0;
+
+      }
+     else{
+     
+        return $answer[0]["base"];
+
+        }
 
     }
 
@@ -59,7 +64,15 @@ VALUES (:idUsuario, :idSubasta, :puja);",array(':idUsuario'=> $idUsuario,':idSub
 
 
      }
+    
+    public function idUsuarioPujaMaximaSubasta($idSubasta){
 
+     $answer = $this->queryList("SELECT ps.idUsuario FROM participa_subasta ps, subasta s WHERE s.idSubasta=:idSubasta AND (s.idSubasta=ps.idSubasta) order by puja desc",array(':idSubasta' => $idSubasta));
+     if(!empty($answer)){
+        return $answer[0]["idUsuario"];
 
+      }
+     return false;
+ }
 
 }

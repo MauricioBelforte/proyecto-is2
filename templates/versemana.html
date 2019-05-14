@@ -10,7 +10,7 @@ function validateForm() {
   var pujamayor = document.form["pujamayor"].value;
   var puja = document.form["puja"].value;
   if (puja <= pujamayor) {
-    alert("El Monto Ingresado es menor a la puja maxima");
+    alert("El monto debe ser mayor al existente");
     return false;
   }
 }
@@ -39,24 +39,42 @@ function validateForm() {
 	<br>
 
 	   <form name="form" action="./index.php?action=pujarSubasta&idSubasta={{idSubasta}}"   onsubmit="return validateForm()" method="POST" >
+
+
+               
   
-        <input type="decimal" id="pujamayor" readonly="readonly" name="pujamayor" value="{{puja}}" />
         <div style=" width: 20%">
-		<div class="input-group mb-3">
+
+
+
+         <div class="input-group mb-3">
            <div class="input-group-prepend">
-            <span class="input-group-text">$</span>
-            <span class="input-group-text">00.00</span>
+            <span class="input-group-text">Puja Maxima</span>
+
+          <input class="form-control" type="decimal" name="pujamayor" value="{{puja}}" readonly>
+         </div>
+       </div>
+
+        
+
+		       <div class="input-group mb-3">
+           <div class="input-group-prepend">
+            <span class="input-group-text">Ingrese Monto</span>
             </div>
-         <input type="decimal" id="puja" class="form-control" name="puja">
-
-        </div>
-        </div>
+            <input type="decimal" id="puja" min="0" class="form-control" name="puja">
+           </div>
+           </div>
   
+ 
+       {% if boton == true %}
 
+          <button type="submit" class="btn btn-primary">Pujar</button>
 
-
-     <button type="submit" class="btn btn-primary">Pujar</button>
+      {% else %}
      
+          <button type="submit" class="btn btn-primary" disabled>Pujar</button>
+ 
+     {% endif %}
     </form>
 
 
