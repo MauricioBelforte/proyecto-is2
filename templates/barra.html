@@ -17,12 +17,25 @@
 
       {% else %}
 
+
+       {% if tipousuario == "administrador" %}
        
         <li class="nav-item">
         <a class="nav-link" href="./index.php?action=cargarResidencia">Cargar Residencia</a>
         </li>
 
-      <a class="nav-link" href="./index.php?action=cerrarSesion">{{user}}</a>
+        {% endif %}
+
+        <a class="nav-link" href="./index.php?action=cerrarSesion">{{user}}</a>
+
+
+
+
+
+
+
+
+
 
       {% endif %}
     </ul>

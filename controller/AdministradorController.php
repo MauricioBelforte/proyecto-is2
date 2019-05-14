@@ -25,9 +25,10 @@ class AdministradorController extends Controller {
              return false;
         }
 
-        if($_POST['username'] == "usuario" && $_POST['password'] == 1234){
-             $this->alta_sesion($_POST['username'], 1); // el id es ficticio para esta entrega
-             $this->vistaHome($_POST['username']);
+        if($_POST['username'] == "admin" && $_POST['password'] == 1234){
+             $this->alta_sesion($_POST['username'], 1, "administrador"); // el id es ficticio para esta entrega
+            $datos= array('user' => $_POST['username'], 'tipousuario' => $_SESSION['tipo'] );
+             $this->vistaHome($datos);
         }else{           
              $this->vistaIniciarSesion(array('mensaje' => "Email o contraseña incorrecta"));
              return false;
