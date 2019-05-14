@@ -36,45 +36,48 @@
         <!-- TITLE -->
         <h1 class="text-white text-center" style="font-size: 80px"> Home Switch Home </h1>
 
-        <div class="text-center">
+        <div class="d-flex justify-content-center">
 
           <!-- LOG IN -->
           <button type="button" class="btn btn-primary btn-lg mr-3" data-toggle="modal" data-target="#login">Iniciar Sesión</button>
 
-          <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="loginLabel">Iniciar Sesión</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="form-group">
-                      <label for="email-input-login" class="col-form-label">Email</label>
-                      <input type="text" class="form-control" id="email-input-login">
-                    </div>
-                    <div class="form-group">
-                      <label for="password-input-login" class="col-form-label">Contraseña</label>
-                      <input type="text" class="form-control" id="password-input-login">
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary">Entrar</button>
+          <form action="./index.php?action=user-login" method="POST">
+            <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="loginLabel">Iniciar Sesión</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="email-input-login" class="col-form-label">Email</label>
+                        <input name="email-input-login" type="text" class="form-control" id="email-input-login">
+                      </div>
+                      <div class="form-group">
+                        <label for="password-input-login" class="col-form-label">Contraseña</label>
+                        <input name="password-input-login" type="password" class="form-control" id="password-input-login">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </form>
 
 
           <!-- SIGN UP -->
           <button type="button" class="btn btn-secondary btn-lg mr-4" data-toggle="modal" data-target="#signup">Registrarse</button>
 
-          <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <form action="./index.php?action=user-signup" method="POST">
+            <div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -97,11 +100,12 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  <button type="button" class="btn btn-primary">Crear cuenta</button>
+                  <button type="submit" class="btn btn-primary">Crear cuenta</button>
                 </div>
               </div>
             </div>
           </div>
+          </form>
 
         </div>
       </div>
@@ -125,8 +129,8 @@
                 <div class="modal-body">
                   <form>
                     <div class="form-group">
-                      <label for="email-input-admin" class="col-form-label">Email</label>
-                      <input name="email-input-admin" type="text" class="form-control" id="email-input-admin">
+                      <label for="username-input-admin" class="col-form-label">Email</label>
+                      <input name="username-input-admin" type="text" class="form-control" id="username-input-admin">
                     </div>
                     <div class="form-group">
                       <label for="password-input-admin" class="col-form-label">Contraseña</label>

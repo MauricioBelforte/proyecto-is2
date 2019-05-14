@@ -11,6 +11,7 @@ require_once('controller/AdministradorController.php');
 require_once('view/TwigView.php');
 require_once('view/Home.php');
 require_once('view/AdminPanel.php');
+require_once('view/UserPanel.php');
 require_once('view/IniciarSesion.php');
 require_once('view/Exito.php');
 require_once('view/CargarResidencia.php');
@@ -30,9 +31,6 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosUsuario'){
 else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosAdministrador'){
      AdministradorController::getInstance()->verificarDatos();
 }
-else if(isset($_GET["action"]) && $_GET["action"] == 'admin-login'){
-     AdministradorController::getInstance()->adminLogin();
-}
 else if(isset($_GET["action"]) && $_GET["action"] == 'cerrarSesion'){
      Controller::getInstance()->cerrarSesion();
 }
@@ -44,7 +42,13 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosResidencia')
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'mostrarResidencia' && !empty($_GET['id'])){
      ResidenciaController::getInstance()->mostrarResidencia($_GET['id']);
-}            
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'admin-login'){
+  AdministradorController::getInstance()->adminLogin();
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'user-login'){
+  UsuarioController::getInstance()->userLogin();
+}
 else{
 	if(!isset($_SESSION['usuario']))
 		Controller::getInstance()->vistaHome(null);

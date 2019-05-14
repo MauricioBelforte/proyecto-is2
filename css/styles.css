@@ -14,6 +14,15 @@
     width: 50px;
 }
 
+.search-box {
+    background-color: #1c7bc1;
+}
+
+.results-box {
+    margin-top: 50px;
+    margin-left: 300px;
+}
+
 /* TABLETS & DESKTOP*/
 
 @media only screen and (min-width: 768px) {
