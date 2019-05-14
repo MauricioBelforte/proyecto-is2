@@ -48,7 +48,7 @@ class UsuarioController extends Controller {
     // TODO: Validaciones del lado del servidor
 
     if($_POST['email-input-login'] == "user@user.com" && $_POST['password-input-login'] == 1234){
-      $this->alta_sesion($_POST['email-input-login'], 1); // el id es ficticio para esta entrega
+      $this->alta_sesion($_POST['email-input-login'], 1, "usuario"); // el id es ficticio para esta entrega
       $this->vistaUserPanel($_POST['email-input-login']);
     }else{
       $this->vistaIniciarSesion(array('mensaje' => "Email o contraseña incorrecta"));

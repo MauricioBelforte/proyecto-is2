@@ -46,7 +46,7 @@ class AdministradorController extends Controller {
      // TODO: Validaciones del lado del servidor
 
      if($_POST['username-input-admin'] == "admin" && $_POST['password-input-admin'] == 1234){
-       $this->alta_sesion($_POST['username-input-admin'], 1); // el id es ficticio para esta entrega
+       $this->alta_sesion($_POST['username-input-admin'], 1, "administrador"); // el id es ficticio para esta entrega
        $this->vistaAdminPanel($_POST['username-input-admin']);
      }else{
        $this->vistaIniciarSesion(array('mensaje' => "Email o contraseña incorrecta"));
