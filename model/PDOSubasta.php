@@ -75,4 +75,6 @@ VALUES (:idUsuario, :idSubasta, :puja);",array(':idUsuario'=> $idUsuario,':idSub
      return false;
  }
 
+
+
 }

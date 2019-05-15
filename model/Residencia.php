@@ -10,8 +10,9 @@ class Residencia extends PDORepository {
     public $provincia;
     public $partido; 
     public $descripcion;
+    public $tieneparticipantes;
 
-    public function __construct($idResidencia,$ciudad,$direccion,$idAdministrador,$titulo,$provincia,$partido,$descripcion) {
+    public function __construct($idResidencia,$ciudad,$direccion,$idAdministrador,$titulo,$provincia,$partido,$descripcion,$tieneparticipantes) {
     	$this->idResidencia= $idResidencia;
     	$this->ciudad= $ciudad;
     	$this->direccion= $direccion;
@@ -20,6 +21,7 @@ class Residencia extends PDORepository {
     	$this->provincia= $provincia;
         $this->partido= $partido;
         $this->descripcion= $descripcion;
+        $this->tieneparticipantes=$tieneparticipantes;
         
     }
 

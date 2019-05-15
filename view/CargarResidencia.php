@@ -10,5 +10,12 @@ class CargarResidencia extends TwigView {
         
     }
 
+
+    public function editarResidencia($datos){
+       
+       echo self::getTwig()->render('editaresidencia.html',$datos);
+
+     }
+
     
 }

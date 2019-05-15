@@ -21,10 +21,7 @@ class ResidenciaController extends Controller {
 
     public function cargarResidencia($datos){
         if(empty($_SESSION['usuario']) && empty($_SESSION['tipo'])){
-
             return false;
-
-
         }
         if($_SESSION['tipo'] == "administrador"){
     	     $view = new CargarResidencia();
@@ -33,36 +30,51 @@ class ResidenciaController extends Controller {
 
     }
 
+    public function procesarAltaResidencia(){
+
+      if ($this->verificarDatosResidencia()){
+          $this->altaResidencia();
+          return true;
+      }
+
+      $this->cargarResidencia(array('mensaje' => "Ups hubo un error. Intente de nuevo y llene TODOS los campos"));
+      return false;
+
+    }
+
     public function verificarDatosResidencia(){
 
         if(!isset($_SESSION['tipo']) ||  $_SESSION['tipo'] != "administrador" ){
-
             // mensaje de error (no tiene autorizacion)
             return false;
 
-
         }
-
         if(empty($_POST['titulo']) || empty($_POST['idProvincia']) || empty($_POST['idPartido']) || empty($_POST['idLocalidad']) || empty($_POST['direccion'] ) ||  empty($_POST['descripcion'])){
-            $this->cargarResidencia(array('mensaje' => "Ups hubo un error. Intente de nuevo y llene TODOS los campos"));
+           
             return false;
         }
-        PDOResidencia::getInstance()->insertarResidencia();
-        $this->vistaExito(array('mensaje' =>"¡¡¡La residencia fue cargada exitosamente!!!", 'user' => $_SESSION['usuario']));
-
 
         return true;
 
     }
 
-    public function mostrarResidencia($idResidencia){
+
+    public function altaResidencia(){
+      // Inserta la residencia
+       PDOResidencia::getInstance()->insertarResidencia();
+        $this->vistaExito(array('mensaje' =>"¡¡¡La residencia fue cargada exitosamente!!!", 'user' => $_SESSION['usuario']));
+        return true;
+       
+    }
+
+    public function mostrarResidencia($datos){
         $view= new MostrarResidencia();
         if(!isset($_SESSION['usuario']) ||  empty($_SESSION['usuario']))
-           $view->show(array('user' => null,'tipousuario' => null,'residencia' => PDOResidencia::getInstance()->traerResidencia($idResidencia), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($idResidencia)));
+           $view->show(array('user' => null,'tipousuario' => null,'residencia' => PDOResidencia::getInstance()->traerResidencia($datos['id']), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($datos['id'])));
 
         else
 
-           $view->show(array('user' => $_SESSION['usuario'],'tipousuario' => $_SESSION['tipo'], 'residencia' => PDOResidencia::getInstance()->traerResidencia($idResidencia), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($idResidencia)));
+           $view->show(array('user' => $_SESSION['usuario'],'tipousuario' => $_SESSION['tipo'], 'residencia' => PDOResidencia::getInstance()->traerResidencia($datos['id']), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($datos['id']),'datos' => $datos));
     }
 
     public function vistaSemana($datos){
@@ -119,6 +131,41 @@ class ResidenciaController extends Controller {
        return false;
       
      }
+
+   public function editarResidencia($idResidencia){
+       // se puede editar una residencia si NO hay partipantes en las semanas correspondiente a la misma
+    if(!PDOResidencia::getInstance()->existenParticipantes($idResidencia)){
+       $residencia= PDOResidencia::getInstance()->traerResidencia($idResidencia);
+       $view= new CargarResidencia();
+       $view->editarResidencia(array('user' => $_SESSION['usuario'],'datos' => $residencia[0]));
+       return true;
+     }
+
+     $this->vistaExito(array('mensaje' =>"No puede editarse.Ya existen Participantes", 'user' => $_SESSION['usuario']));
+     return false;
+
+   }
+
+   public function procesarEdicionResidencia($idResidencia){
+
+    if ($this->verificarDatosResidencia()){
+         PDOResidencia::getInstance()->actualizarResidencia($idResidencia);
+         $this->mostrarResidencia(array('id' => $idResidencia, 'mensaje' => 'La residencia fue actualizada con exito', 'exito' => true));
+         return true;
+    }
+
+    $this->mostrarResidencia(array('id' => $idResidencia, 'mensaje' => 'La publicacion no fue editada', 'exito' => false));
+      return false;
+
+   }
+
+
+   public function cancelarEdicion($idResidencia){
+
+      $this->mostrarResidencia(array('id' => $idResidencia, 'mensaje' => '¡¡Edicion Cancelada!!', 'exito' => true));
+       return true;
+   }
+
 
 
 

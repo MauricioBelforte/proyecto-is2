@@ -40,11 +40,11 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'cerrarSesion'){
 else if(isset($_GET["action"]) && $_GET["action"] == 'cargarResidencia'){
      ResidenciaController::getInstance()->cargarResidencia(null);
 }
-else if(isset($_GET["action"]) && $_GET["action"] == 'verificarDatosResidencia'){
-     ResidenciaController::getInstance()->verificarDatosResidencia();
+else if(isset($_GET["action"]) && $_GET["action"] == 'procesarAltaResidencia'){
+     ResidenciaController::getInstance()->procesarAltaResidencia();
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'mostrarResidencia' && !empty($_GET['id'])){
-     ResidenciaController::getInstance()->mostrarResidencia($_GET['id']);
+     ResidenciaController::getInstance()->mostrarResidencia(array('id' => $_GET['id'],'mensaje'=> null));
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'verSemana' && !empty($_POST['idRS'])){
      ResidenciaController::getInstance()->verSemana($_POST['idRS']);
@@ -60,6 +60,15 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'user-login'){
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'list-auctions'){
   AuctionsController::getInstance()->listAuctions();
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'editarResidencia' && !empty($_GET['id'])){
+   ResidenciaController::getInstance()->editarResidencia($_GET['id']);
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'procesarEdicionResidencia' && !empty($_GET['id'])){
+   ResidenciaController::getInstance()->procesarEdicionResidencia($_GET['id']);
+}
+else if(isset($_GET["action"]) && $_GET["action"] == 'cancelarEdicionResidencia' && !empty($_GET['id'])){
+   ResidenciaController::getInstance()->cancelarEdicion($_GET['id']);
 }
 else{
 	if(!isset($_SESSION['usuario']))

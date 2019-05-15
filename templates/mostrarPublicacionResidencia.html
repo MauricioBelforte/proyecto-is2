@@ -18,8 +18,27 @@
       <a href="" class="btn btn-primary" role="button" aria-pressed="true">Crear Subasta </a>
 
    {% endif %}
+
+
   
     <main class="main">
+      <!-- mensaje de exito o no -->
+       {% if datos.exito %}
+        <br>
+       <div class="alert alert-success" role="alert">
+        {{datos.mensaje}}
+       </div>
+      {% endif %}
+
+      {% if not datos.exito %}
+        <div class="alert alert-danger" role="alert">
+       {{datos.mensaje}}
+      </div>
+      {% endif %}
+
+
+
+
 
 	<center><h1>{{ residencia[0].titulo }}</h1>
 
