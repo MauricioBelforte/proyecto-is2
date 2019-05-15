@@ -21,10 +21,23 @@
     public function vistaHome($datos){
         $view = new Home();
         $listaresidencia=PDOResidencia::getInstance()->listarTodas();
-        if(empty($datos['user']))
+        if(empty($datos['user'])){
            $view->show(array('user' => null,'listaresidencia'=> $listaresidencia));
-        else
-           $view->show(array('user' => $datos['user'],'listaresidencia'=> $listaresidencia, 'tipousuario' => $datos['tipousuario']));
+           return true;
+        }
+         $viewAdmin= new AdminPanel();
+        if (!empty($_SESSION['usuario']) && $_SESSION['tipo'] == "administrador") {
+            $viewAdmin->show(array('user' => $_SESSION['usuario'],'listaresidencia'=> $listaresidencia));
+            return true;
+        }
+            $viewUser= new UserPanel();
+        if (!empty($_SESSION['usuario']) && $_SESSION['tipo'] == "usuario") {
+            $viewUser->show(array('user' => $_SESSION['usuario'],'listaresidencia'=> $listaresidencia));
+            return true;
+        }
+        
+        return false;
+           //$view->show(array('user' => $datos['user'],'listaresidencia'=> $listaresidencia, 'tipousuario' => $datos['tipousuario']));
 
 
     }
