@@ -21,10 +21,10 @@ class PDOSubasta extends PDORepository {
 
     public function subastaInfo($idRS){
         //subasta info activas ( activo =0)
-        $answer = $this->queryList("SELECT s.idSubasta, s.idResidenciaSemana, s.base FROM residencia_semana rs INNER JOIN subasta s ON (rs.idResidenciaSemana=s.idResidenciaSemana) WHERE s.idResidenciaSemana = :idResidenciaSemana and rs.estado = 0",array(':idResidenciaSemana' => $idRS));
+        $answer = $this->queryList("SELECT su.idSubasta, su.idResidenciaSemana, su.base, su.activa, s.fecha_inicio, s.fecha_fin FROM residencia_semana rs INNER JOIN  semana s ON (rs.idSemana=s.idSemana) INNER JOIN subasta su ON (su.idResidenciaSemana=rs.idResidenciaSemana) WHERE su.idResidenciaSemana = :idResidenciaSemana",array(':idResidenciaSemana' => $idRS));
         $final_answer = [];
         foreach ($answer as &$element) {
-            $final_answer[] = new Subasta ($element["idSubasta"],$element["idResidenciaSemana"], $element["base"]);
+            $final_answer[] = new Subasta ($element["idSubasta"],$element["idResidenciaSemana"], $element["base"],$element["activa"],$element["fecha_inicio"],$element["fecha_fin"]);
         }
 
         return $final_answer;
@@ -59,9 +59,9 @@ class PDOSubasta extends PDORepository {
    
 
      public function insertarParticipanteSubasta($idUsuario, $idSubasta, $puja){
-        $this->queryList("INSERT INTO participa_subasta (idSubasta,idUsuario,puja)
-VALUES (:idUsuario, :idSubasta, :puja);",array(':idUsuario'=> $idUsuario,':idSubasta' => $idSubasta,':puja' => $puja));
-
+        $answer= $this->queryList("INSERT INTO participa_subasta (idSubasta, idUsuario, puja)
+VALUES (:idSubasta,:idUsuario, :puja);",array(':idUsuario'=> $idUsuario,':idSubasta' => $idSubasta,':puja' => $puja));
+      var_dump($answer);
 
      }
     
@@ -74,6 +74,60 @@ VALUES (:idUsuario, :idSubasta, :puja);",array(':idUsuario'=> $idUsuario,':idSub
       }
      return false;
  }
+
+
+
+    public function traerResidenciaSemanasSubastas($idResidencia) {
+
+          //Para una residencia trae unicamente las semanas que son SUBASTAS
+
+         $answer = $this->queryList("SELECT rs.idResidenciaSemana, rs.idResidencia, rs.idSemana ,s.fecha_inicio , s.fecha_fin, rs.estado FROM residencia_semana rs INNER JOIN  semana s ON (rs.idSemana=s.idSemana) INNER JOIN subasta su ON (su.idResidenciaSemana=rs.idResidenciaSemana)WHERE idResidencia =:idResidencia",array(':idResidencia' => $idResidencia));
+         
+         $final_answer = [];
+
+         foreach ($answer as &$element) {
+            $final_answer[] = new ResidenciaSemana ($element["idResidenciaSemana"],$element["idResidencia"], $element["idSemana"],$element["fecha_inicio"],$element["fecha_fin"],$element["estado"]);
+         }
+
+        return $final_answer;
+      }
+
+
+    public function traerSubastasInactivas($idResidencia) {
+
+          //Para una residencia trae unicamente las semanas que  esta Inactivas
+
+         $answer = $this->queryList("SELECT su.idSubasta, su.idResidenciaSemana, su.base, su.activa, s.fecha_inicio, s.fecha_fin FROM residencia_semana rs INNER JOIN  semana s ON (rs.idSemana=s.idSemana) INNER JOIN subasta su ON (su.idResidenciaSemana=rs.idResidenciaSemana)WHERE idResidencia =:idResidencia AND su.activa=:activa",array(':idResidencia' => $idResidencia, ':activa' => 0 ));
+         
+         $final_answer = [];
+
+         foreach ($answer as &$element) {
+            $final_answer[] = new Subasta ($element["idSubasta"],$element["idResidenciaSemana"], $element["base"],$element["activa"],$element["fecha_inicio"],$element["fecha_fin"]);
+         }
+
+        return $final_answer;
+      }
+
+
+      public function traerSubastasActivas($idResidencia){
+        $answer = $this->queryList("SELECT su.idSubasta, su.idResidenciaSemana, su.base, su.activa, s.fecha_inicio, s.fecha_fin FROM residencia_semana rs INNER JOIN  semana s ON (rs.idSemana=s.idSemana) INNER JOIN subasta su ON (su.idResidenciaSemana=rs.idResidenciaSemana)WHERE idResidencia =:idResidencia AND su.activa=:activa",array(':idResidencia' => $idResidencia, ':activa' => 1 ));
+         
+         $final_answer = [];
+
+         foreach ($answer as &$element) {
+            $final_answer[] = new Subasta ($element["idSubasta"],$element["idResidenciaSemana"], $element["base"],$element["activa"],$element["fecha_inicio"],$element["fecha_fin"]);
+         }
+
+        return $final_answer;
+
+
+
+      }
+
+      public function activarSubasta($idSubasta){
+        $answer = $this->queryList("UPDATE subasta SET activa= :activa WHERE idSubasta=:idSubasta",array(':idSubasta' => $idSubasta, ':activa' => 1 ));
+        return true;
+      }
 
 
 

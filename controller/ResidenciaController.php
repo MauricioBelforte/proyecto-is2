@@ -73,8 +73,8 @@ class ResidenciaController extends Controller {
            $view->show(array('user' => null,'tipousuario' => null,'residencia' => PDOResidencia::getInstance()->traerResidencia($datos['id']), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($datos['id'])));
 
         else
-
-           $view->show(array('user' => $_SESSION['usuario'],'tipousuario' => $_SESSION['tipo'], 'residencia' => PDOResidencia::getInstance()->traerResidencia($datos['id']), 'residenciasemanasubastas'=> PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($datos['id']),'datos' => $datos));
+          //PDOResidenciaSemana::getInstance()->traerResidenciaSemanasSubastas($datos['id']),'datos' => $datos)
+        $view->show(array('user' => $_SESSION['usuario'],'tipousuario' => $_SESSION['tipo'], 'residencia' => PDOResidencia::getInstance()->traerResidencia($datos['id']), 'residenciasemanasubastas' => AuctionsController::getInstance()->listadoSubastasHabilitadas($datos['id']),'datos' => $datos ));
     }
 
     public function vistaSemana($datos){

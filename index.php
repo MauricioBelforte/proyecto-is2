@@ -6,6 +6,7 @@ error_reporting(-1);
 session_start();
 
 require_once('controller/UsuarioController.php');
+require_once('controller/AuctionsController.php');
 require_once('controller/ResidenciaController.php');
 require_once('controller/AdministradorController.php');
 require_once('view/TwigView.php');
@@ -44,7 +45,7 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'procesarAltaResidencia'){
      ResidenciaController::getInstance()->procesarAltaResidencia();
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'mostrarResidencia' && !empty($_GET['id'])){
-     ResidenciaController::getInstance()->mostrarResidencia(array('id' => $_GET['id'],'mensaje'=> null));
+     ResidenciaController::getInstance()->mostrarResidencia(array('id' => $_GET['id'],'mensaje'=> null, 'exito'=> null));
 }
 else if(isset($_GET["action"]) && $_GET["action"] == 'verSemana' && !empty($_POST['idRS'])){
      ResidenciaController::getInstance()->verSemana($_POST['idRS']);

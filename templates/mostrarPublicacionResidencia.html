@@ -23,6 +23,7 @@
   
     <main class="main">
       <!-- mensaje de exito o no -->
+    {% if datos.exito is not empty %}
        {% if datos.exito %}
         <br>
        <div class="alert alert-success" role="alert">
@@ -35,6 +36,7 @@
        {{datos.mensaje}}
       </div>
       {% endif %}
+     {% endif %}
 
 
 
@@ -93,7 +95,7 @@
              <br>
             {% endfor %}
             <br>
-            <button type="submit" class="btn btn-primary">Ver Estado</button>  
+            <button type="submit" class="btn btn-primary">Pujar en Semana</button>  
 
             </form>
   {% endif %}
