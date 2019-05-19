@@ -65,6 +65,10 @@ else if(isset($_GET["action"]) && $_GET["action"] == 'list-auctions'){
 else if(isset($_GET["action"]) && $_GET["action"] == 'editarResidencia' && !empty($_GET['id'])){
    ResidenciaController::getInstance()->editarResidencia($_GET['id']);
 }
+
+else if(isset($_GET["action"]) && $_GET["action"] == 'eliminarResidencia' && !empty($_GET['id'])){
+     ResidenciaController::getInstance()->eliminarResidencia($_GET['id']);
+}
 else if(isset($_GET["action"]) && $_GET["action"] == 'procesarEdicionResidencia' && !empty($_GET['id'])){
    ResidenciaController::getInstance()->procesarEdicionResidencia($_GET['id']);
 }

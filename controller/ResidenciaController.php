@@ -168,6 +168,32 @@ class ResidenciaController extends Controller {
 
 
 
+   public function eliminarResidencia($idResidencia){
+     
+      if(empty($_SESSION['usuario']) && empty($_SESSION['tipo'])){
+
+            $this->vistaExito(array('mensaje' =>"No tiene permisos para hacer esta accion", 'user' => $_SESSION['usuario']));
+               return false;
+        }
+
+      else{
+    
+   //     if($_SESSION['tipo'] == "administrador"){
+           if (!PDOResidencia::getInstance()->existenParticipantes($idResidencia)){      
+
+              PDOResidencia::getInstance()->borrarResidencia($idResidencia);
+
+              $this->vistaExito(array('mensaje' =>"La residencia se elimino satisfactoriamente", 'user' => $_SESSION['usuario']));  
+               }
+
+           else{
+              $this->vistaExito(array('mensaje' =>"La Residencia no pudo ser eliminada, debido a que se encuentra reservada ", 'user' => $_SESSION['usuario']));
+               return false;
+               }
+           }
+     }
+
+        
 
 
 }

@@ -75,7 +75,36 @@
               {% else %}
               <a href="./index.php?action=editarResidencia&id={{residencia.idResidencia}}" class="btn btn-secondary btn-sm">Editar</a>
               {% endif %}
-              <a href="#" class="btn btn-danger btn-sm">Borrar</a>
+              <a href="#ventanaConfirmacion{{residencia.idResidencia}}" class="btn btn-danger btn-sm" data-toggle="modal" >Borrar</a>
+         <!--     <a href="./index.php?action=eliminarResidencia&id={{residencia.idResidencia}}" class="btn btn-danger btn-sm">Borrar</a>  
+         -->  
+              <div class="modal fade" id="ventanaConfirmacion{{residencia.idResidencia}}">
+
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">    
+                         <h5 class="modal-title">
+                           ¿Desea eliminar los datos de la residencia {{residencia.titulo}} permanentemente?
+                         </h5>
+                         <button type ="button" class="close"  data-dismiss="modal" aria-hidden="true">&times;</button>
+                         
+                      </div>    
+
+                      <div class="modal-body">
+                        <p>Si presiona Confirmar Borrado, los datos de la residencia se eliminarán permanentemente. ¿Desea continuar? </p>
+                      </div>
+
+                      <div class="modal-footer">
+                        <button type ="button" class="btn btn-default"   data-dismiss="modal">Cancelar</button>  
+                        <a  href="./index.php?action=eliminarResidencia&id={{residencia.idResidencia}}" class="btn btn-danger " role="button" >
+                          Confirmar Borrado
+                        </a>
+
+                      </div>         
+
+                  </div>
+                </div> 
+              </div>
             </div>
 
           </div>

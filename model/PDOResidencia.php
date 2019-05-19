@@ -79,4 +79,11 @@ class PDOResidencia extends PDORepository {
   
      }
 
+    public function borrarResidencia($idResidencia) {
+
+      
+        $answer = $this->queryList("DELETE FROM residencia WHERE idResidencia=:idResidencia",array(':idResidencia' => $idResidencia));
+            }
+
+
 }
